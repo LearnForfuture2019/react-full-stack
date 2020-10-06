@@ -6,46 +6,81 @@ import {
     WingBlank,
     WhiteSpace, Radio, Button
 } from 'antd-mobile'
-import Logo from '../../components/imgs/logo/logo.jpg'
+import {register} from '../../request'
+import Logo from "../../components/logo";
 import './register.css'
 
 export default class Register extends Component {
     state = {
-        username:'',
-        password:'',
-        password2:'',
-        type:'dashen'
+        username: '',
+        password: '',
+        password2: '',
+        type: 'dashen',
+        errMsg: ''
     }
-    handleChange =(type,value)=>{
+    handleChange = (type, value) => {
         this.setState({
-            [type]:value
+            [type]: value
         })
     }
-    register = () =>{
-        const {username,password,password2,type} = this.state
-        console.log({username,password,password2,type})
+    register = () => {
+        const {username, password, password2, type} = this.state
+        if (!username || !password || !password2){
+            return this.setState({errMsg:'用户名/密码必须输入'})
+        }else if (password !== password2){
+            return this.setState({errMsg:'两次输入的密码不一致'})
+        }
+        register({username, password, password2,type})
+            .then(resp => {
+                console.log(resp)
+                if (resp.status === 200){
+                    if (resp.data.code === 200){
+                        //注册成功，跳转到登录页面
+                        this.props.history.push('/login')
+                    }else{
+                        //注册失败
+                        this.setState({
+                            errMsg:resp.data.msg
+                        })
+                    }
+                }
+            })
     }
-    toLogin = ()=>{
+    toLogin = () => {
         this.props.history.push('/login')
     }
+    handleFocus =()=>{
+        this.setState({
+            errMsg:''
+        })
+    }
     render() {
+        const {errMsg} = this.state
         return (
             <div>
                 <NavBar>BOSS招聘</NavBar>
-                <img src={Logo} alt="logo" id='logo'/>
+                <Logo/>
                 <WingBlank>
+                    {
+                        errMsg?<p id='error-msg'>{errMsg}</p>:null
+                    }
                     <List>
-                        <InputItem onChange={value => this.handleChange('username',value)}>用户名：</InputItem>
+                        <InputItem
+                            onChange={value => this.handleChange('username', value)}
+                            onFocus={this.handleFocus}
+                        >用户名：</InputItem>
                         <WhiteSpace/>
                         <InputItem type='password'
-                                   onChange={value => this.handleChange('password',value)}
+                                   onChange={value => this.handleChange('password', value)}
+                                   onFocus={this.handleFocus}
                         >
                             密&nbsp;&nbsp;&nbsp;码：
                         </InputItem>
                         <WhiteSpace/>
                         <InputItem
                             type='password'
-                            onChange={value => this.handleChange('password2',value)}
+                            onChange={value => this.handleChange('password2', value)}
+                            onFocus={this.handleFocus}
                         >
                             确认密码：
                         </InputItem>
@@ -53,14 +88,14 @@ export default class Register extends Component {
                         <List.Item>
                             <span>用户类型：</span>
                             <Radio
-                                style={{margin:'0 10px'}}
+                                style={{margin: '0 10px'}}
                                 checked={this.state.type === 'dashen'}
-                                onClick={() => this.handleChange('type','dashen')}
+                                onClick={() => this.handleChange('type', 'dashen')}
                             >
                                 大神
                             </Radio>
                             <Radio checked={this.state.type === 'laoban'}
-                                   onClick={() => this.handleChange('type','laoban')}
+                                   onClick={() => this.handleChange('type', 'laoban')}
 
                             >
                                 老板

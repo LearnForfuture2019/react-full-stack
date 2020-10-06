@@ -1,5 +1,6 @@
-#logo{
-    width: 150px;
-    height: 150px;
-    margin: 20px 125px;
+
+#error-msg{
+    color: red;
+    text-align: center;
+    font-size: 18px;
 }

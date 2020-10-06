@@ -4,15 +4,17 @@ import {
     List,
     InputItem,
     WingBlank,
-    WhiteSpace, Radio, Button
+    WhiteSpace,
+    Button
 } from 'antd-mobile'
-import Logo from '../../components/imgs/logo/logo.jpg'
+import Logo from "../../components/logo";
 import './login.css'
 
 export default class Login extends Component {
     state = {
         username:'',
         password:'',
+        errMsg:''
     }
     handleChange =(type,value)=>{
         this.setState({
@@ -20,18 +22,22 @@ export default class Login extends Component {
         })
     }
     login = () =>{
-        const {username,password,password2,type} = this.state
-        console.log({username,password,password2,type})
+        const {username,password} = this.state
+        console.log({username,password})
     }
     toRegister= ()=>{
         this.props.history.push('/register')
     }
     render() {
+        const {errMsg} = this.state
         return (
             <div>
                 <NavBar>BOSS招聘</NavBar>
-                <img src={Logo} alt="logo" id='logo'/>
+                <Logo/>
                 <WingBlank>
+                    {
+                        errMsg?<p id='error-msg'>{errMsg}</p>:null
+                    }
                     <List>
                         <InputItem onChange={value => this.handleChange('username',value)}>用户名：</InputItem>
                         <WhiteSpace/>

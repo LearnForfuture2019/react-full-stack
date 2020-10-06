@@ -18,7 +18,7 @@ ReactDOM.render(
                 })
             }
             {/*访问根目录的话，跳转到/admin*/}
-            <Redirect to='/admin' from='/' exact/>
+            <Redirect to='/login' from='/' exact/>
             {/*上述路由都没有匹配到，显示404*/}
             <Redirect to='/404' />
         </Switch>
