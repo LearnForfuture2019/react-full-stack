@@ -13,7 +13,13 @@ const Register = Loadable({
     loader: () => import('./register'),
     loading: Loading,
 });
+
+const NotFound = Loadable({
+    loader: () => import('./notFound'),
+    loading: Loading,
+});
 export {
     Login,
-    Register
+    Register,
+    NotFound
 }
