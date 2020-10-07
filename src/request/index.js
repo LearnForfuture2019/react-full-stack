@@ -18,3 +18,8 @@ export const register = (data) => {
 export const login = (data) =>{
     return service.post('/login',data)
 }
+
+//更新用户信息
+export const updateById = (data) =>{
+    return service.post('/update',data)
+}

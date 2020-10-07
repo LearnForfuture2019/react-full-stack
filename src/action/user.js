@@ -1,5 +1,9 @@
 import actionTypes from './action-types'
-import {login,register} from '../request'
+import {
+    login,
+    register,
+    updateById
+} from '../request'
 //同步登录成功
 export const loginSuccess = (userInfo) => ({
     type: actionTypes.LOGIN_SUCCESS,
@@ -14,6 +18,11 @@ export const loginFailed = (errMsg) => ({
 export const errorMessage = (errMsg)=>({
     type:actionTypes.ERROR_MESSAGE,
     payload:errMsg
+})
+//同步接收用户信息action
+export const receiveUser = (data) =>({
+    type:actionTypes.RECEIVE_USER,
+    payload:data
 })
 //异步登录action
 export const userLogin = (userInfo)=>{
@@ -30,9 +39,13 @@ export const userLogin = (userInfo)=>{
                         //表示用户名不存在
                         dispatch(loginFailed(resp.data.msg))
                     } else {
-                        //表示登录成功，跳转到相应界面
+                        //表示登录成功，
+                        //保存数据到sessionStorage中
+                        window.sessionStorage.setItem('user',JSON.stringify(resp.data.data.user))
+                        //跳转到相应界面
                         console.log(resp.data.data)
                         dispatch(loginSuccess(resp.data.data.user))
+
                     }
                 }
             })
@@ -56,7 +69,26 @@ export const userRegister =(userInfo)=>{
                         //用户已存在
                         dispatch(loginFailed(resp.data.msg))
                     }else {
+                        window.sessionStorage.setItem('user',JSON.stringify(resp.data.data))
                         //注册成功
+                        dispatch(loginSuccess(resp.data.data))
+                    }
+                }
+            })
+    }
+}
+
+//异步更新action
+export const updateUser = (data)=>{
+    console.log(data)
+    return dispatch =>{
+        updateById(data)
+            .then(resp =>{
+                console.log(resp)
+                if (resp.status === 200){
+                    if (resp.data.code === 0){
+                        dispatch(loginFailed(resp.data.msg))
+                    }else{
                         dispatch(loginSuccess(resp.data.data))
                     }
                 }

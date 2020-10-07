@@ -9,7 +9,12 @@ import {
     TextareaItem
 } from 'antd-mobile'
 import {connect} from 'react-redux'
-
+import {updateUser} from '../../../action/user'
+import {Redirect} from 'react-router-dom'
+const mapState = state =>({
+    user:state.user
+})
+@connect(mapState,{updateUser})
 class DaShenInfo extends Component {
     state = {
         header: '',
@@ -39,11 +44,17 @@ class DaShenInfo extends Component {
     }
     toSave =()=>{
         const {info,header,post} = this.state
-        console.log({info,header,post})
+        const {_id} = JSON.parse(window.sessionStorage.getItem('user'))
+        console.log(_id)
+        this.props.updateUser({info,header,post,_id})
     }
     render() {
         const data = this.getHeaderList()
-        const {header,post,info} = this.state
+        const {header} = this.state
+        const {path} = this.props.user
+        if (path){
+            return <Redirect to={path}/>
+        }
         return (
             <div>
                 <NavBar>大神信息完善</NavBar>
@@ -87,6 +98,4 @@ class DaShenInfo extends Component {
         )
     }
 }
-export default connect(
-
-)(DaShenInfo)
+export default DaShenInfo
