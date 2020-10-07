@@ -13,3 +13,8 @@ service.interceptors.response.use(resp =>{
 export const register = (data) => {
     return service.post('/register', data)
 }
+
+//登录
+export const login = (data) =>{
+    return service.post('/login',data)
+}

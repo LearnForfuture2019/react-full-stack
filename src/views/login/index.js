@@ -7,6 +7,7 @@ import {
     WhiteSpace,
     Button
 } from 'antd-mobile'
+import {login} from '../../request'
 import Logo from "../../components/logo";
 import './login.css'
 
@@ -23,10 +24,31 @@ export default class Login extends Component {
     }
     login = () =>{
         const {username,password} = this.state
-        console.log({username,password})
+        if (!username || !password) {
+            return this.setState({errMsg: '用户名/密码必须输入'})
+        }
+        login({username,password})
+            .then(resp =>{
+                if (resp.status === 200){
+                    //表示请求发送成功
+                    if (resp.data.code === 0){
+                        //表示用户名不存在
+                        this.setState({errMsg:resp.data.msg})
+                    }else {
+                        //表示登录成功，跳转到登录页面
+                        console.log(resp)
+
+                    }
+                }
+            })
     }
     toRegister= ()=>{
         this.props.history.push('/register')
+    }
+    handleFocus =()=>{
+        this.setState({
+            errMsg:''
+        })
     }
     render() {
         const {errMsg} = this.state
@@ -39,10 +61,18 @@ export default class Login extends Component {
                         errMsg?<p id='error-msg'>{errMsg}</p>:null
                     }
                     <List>
-                        <InputItem onChange={value => this.handleChange('username',value)}>用户名：</InputItem>
+                        <InputItem
+                            onChange={value => this.handleChange('username',value)}
+                            onFocus={this.handleFocus}
+                            placeholder='请输入账号'
+                        >
+                            用户名：
+                        </InputItem>
                         <WhiteSpace/>
                         <InputItem type='password'
                                    onChange={value => this.handleChange('password',value)}
+                                   onFocus={this.handleFocus}
+                                   placeholder='请输入密码'
                         >
                             密&nbsp;&nbsp;&nbsp;码：
                         </InputItem>
