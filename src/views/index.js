@@ -18,8 +18,29 @@ const NotFound = Loadable({
     loader: () => import('./notFound'),
     loading: Loading,
 });
+
+const DaShenInfo = Loadable({
+    loader: () => import('./main/daShenInfo'),
+    loading: Loading,
+});
+const DaShen = Loadable({
+    loader: () => import('./main/daShen'),
+    loading: Loading,
+});
+const LaoBanInfo = Loadable({
+    loader: () => import('./main/laoBanInfo'),
+    loading: Loading,
+});
+const LaoBan = Loadable({
+    loader: () => import('./main/laoBan'),
+    loading: Loading,
+});
 export {
     Login,
     Register,
-    NotFound
+    NotFound,
+    DaShenInfo,
+    LaoBanInfo,
+    DaShen,
+    LaoBan
 }

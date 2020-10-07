@@ -7,6 +7,7 @@ import {
     WhiteSpace, Radio, Button
 } from 'antd-mobile'
 import {register} from '../../request'
+import {getDirectPath} from '../../assets'
 import Logo from "../../components/logo";
 import './register.css'
 
@@ -35,8 +36,9 @@ export default class Register extends Component {
                 console.log(resp)
                 if (resp.status === 200){
                     if (resp.data.code === 200){
-                        //注册成功，跳转到登录页面
-                        this.props.history.push('/login')
+                        //注册成功，跳转到相应页面
+                        const {header,type} = resp.data.data
+                        this.props.history.replace(getDirectPath(header,type))
                     }else{
                         //注册失败
                         this.setState({

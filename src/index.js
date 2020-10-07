@@ -7,7 +7,7 @@ import {adminRoutes} from './routes'
 ReactDOM.render(
     <HashRouter>
         <Switch>
-            <Route path='/admin' component={App}/>
+            <Route path='/main' component={App}/>
             {
                 adminRoutes.map(route =>{
                     return (
@@ -17,7 +17,7 @@ ReactDOM.render(
                     )
                 })
             }
-            {/*访问根目录的话，跳转到/admin*/}
+            {/*访问根目录的话，跳转到/login*/}
             <Redirect to='/login' from='/' exact/>
             {/*上述路由都没有匹配到，显示404*/}
             <Redirect to='/404' />
