@@ -8,8 +8,9 @@ import {
     WhiteSpace,
     TextareaItem
 } from 'antd-mobile'
+import {connect} from 'react-redux'
 
-export default class DaShenInfo extends Component {
+class DaShenInfo extends Component {
     state = {
         header: '',
         info:'',
@@ -86,3 +87,6 @@ export default class DaShenInfo extends Component {
         )
     }
 }
+export default connect(
+
+)(DaShenInfo)

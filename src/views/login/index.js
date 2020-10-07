@@ -7,12 +7,14 @@ import {
     WhiteSpace,
     Button
 } from 'antd-mobile'
-import {login} from '../../request'
+import {connect} from 'react-redux'
+import {userLogin} from '../../action/user'
 import {getDirectPath} from '../../assets/index'
 import Logo from "../../components/logo";
 import './login.css'
-
-export default class Login extends Component {
+const mapState = state =>({user:state.user})
+@connect(mapState,{userLogin})
+class Login extends Component {
     state = {
         username: '',
         password: '',
@@ -25,10 +27,11 @@ export default class Login extends Component {
     }
     login = () => {
         const {username, password} = this.state
-        if (!username || !password) {
+        userLogin({username, password})
+        /*if (!username || !password) {
             return this.setState({errMsg: '用户名/密码必须输入'})
-        }
-        login({username, password})
+        }*/
+       /* login({username, password})
             .then(resp => {
                 if (resp.status === 200) {
                     //表示请求发送成功
@@ -43,7 +46,7 @@ export default class Login extends Component {
                         this.props.history.replace(pathname)
                     }
                 }
-            })
+            })*/
     }
     toRegister = () => {
         this.props.history.push('/register')
@@ -86,8 +89,7 @@ export default class Login extends Component {
                     </List>
                 </WingBlank>
             </div>
-
-
         )
     }
 }
+export default Login
