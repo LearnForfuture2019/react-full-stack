@@ -6,18 +6,20 @@ import {
     WingBlank,
     WhiteSpace, Radio, Button
 } from 'antd-mobile'
-import {register} from '../../request'
-import {getDirectPath} from '../../assets'
+
+import {userRegister} from '../../action/user'
+import {Redirect} from 'react-router-dom'
 import Logo from "../../components/logo";
 import './register.css'
-
-export default class Register extends Component {
+import {connect} from "react-redux";
+const mapState = state =>({user:state.user})
+@connect(mapState,{userRegister})
+class Register extends Component {
     state = {
         username: '',
         password: '',
         password2: '',
         type: 'dashen',
-        errMsg: ''
     }
     handleChange = (type, value) => {
         this.setState({
@@ -26,38 +28,16 @@ export default class Register extends Component {
     }
     register = () => {
         const {username, password, password2, type} = this.state
-        if (!username || !password || !password2){
-            return this.setState({errMsg:'用户名/密码必须输入'})
-        }else if (password !== password2){
-            return this.setState({errMsg:'两次输入的密码不一致'})
-        }
-        register({username, password, password2,type})
-            .then(resp => {
-                console.log(resp)
-                if (resp.status === 200){
-                    if (resp.data.code === 200){
-                        //注册成功，跳转到相应页面
-                        const {header,type} = resp.data.data
-                        this.props.history.replace(getDirectPath(header,type))
-                    }else{
-                        //注册失败
-                        this.setState({
-                            errMsg:resp.data.msg
-                        })
-                    }
-                }
-            })
+        this.props.userRegister({username, password, password2, type})
     }
     toLogin = () => {
         this.props.history.push('/login')
     }
-    handleFocus =()=>{
-        this.setState({
-            errMsg:''
-        })
-    }
     render() {
-        const {errMsg} = this.state
+        const {errMsg,path} = this.props.user
+        if (path){
+            return <Redirect to={path}/>
+        }
         return (
             <div>
                 <NavBar>BOSS招聘</NavBar>
@@ -113,3 +93,4 @@ export default class Register extends Component {
         )
     }
 }
+export default Register

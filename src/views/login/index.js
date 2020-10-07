@@ -7,18 +7,17 @@ import {
     WhiteSpace,
     Button
 } from 'antd-mobile'
-import {connect} from 'react-redux'
 import {userLogin} from '../../action/user'
-import {getDirectPath} from '../../assets/index'
 import Logo from "../../components/logo";
+import {Redirect} from 'react-router-dom'
 import './login.css'
+import {connect} from "react-redux";
 const mapState = state =>({user:state.user})
 @connect(mapState,{userLogin})
 class Login extends Component {
     state = {
         username: '',
         password: '',
-        errMsg: ''
     }
     handleChange = (type, value) => {
         this.setState({
@@ -27,26 +26,7 @@ class Login extends Component {
     }
     login = () => {
         const {username, password} = this.state
-        userLogin({username, password})
-        /*if (!username || !password) {
-            return this.setState({errMsg: '用户名/密码必须输入'})
-        }*/
-       /* login({username, password})
-            .then(resp => {
-                if (resp.status === 200) {
-                    //表示请求发送成功
-                    if (resp.data.code === 0) {
-                        //表示用户名不存在
-                        this.setState({errMsg: resp.data.msg})
-                    } else {
-                        //表示登录成功，跳转到相应界面
-                        console.log(resp)
-                        const {type, header} = resp.data.data.user
-                        const pathname = getDirectPath(header, type)
-                        this.props.history.replace(pathname)
-                    }
-                }
-            })*/
+        this.props.userLogin({username,password})
     }
     toRegister = () => {
         this.props.history.push('/register')
@@ -58,7 +38,10 @@ class Login extends Component {
     }
 
     render() {
-        const {errMsg} = this.state
+        const {errMsg,path} = this.props.user
+        if (path){
+            return <Redirect to={path}/>
+        }
         return (
             <div>
                 <NavBar>BOSS招聘</NavBar>

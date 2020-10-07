@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
-import {Switch,Route,Redirect} from 'react-router-dom'
-import Frame from './components/frame/index'
+import {Switch,Route} from 'react-router-dom'
 import {mainRoutes} from './routes'
 export default class App extends Component{
     render(){
