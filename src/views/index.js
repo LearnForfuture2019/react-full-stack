@@ -35,6 +35,14 @@ const LaoBan = Loadable({
     loader: () => import('./main/laoBan'),
     loading: Loading,
 });
+const Personal = Loadable({
+    loader: () => import('./main/personal'),
+    loading: Loading,
+});
+const Message = Loadable({
+    loader: () => import('./main/message'),
+    loading: Loading,
+});
 export {
     Login,
     Register,
@@ -42,5 +50,7 @@ export {
     DaShenInfo,
     LaoBanInfo,
     DaShen,
-    LaoBan
+    LaoBan,
+    Personal,
+    Message
 }

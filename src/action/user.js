@@ -39,11 +39,11 @@ export const userLogin = (userInfo)=>{
                         //表示用户名不存在
                         dispatch(loginFailed(resp.data.msg))
                     } else {
+                        console.log('success')
                         //表示登录成功，
                         //保存数据到sessionStorage中
                         window.sessionStorage.setItem('user',JSON.stringify(resp.data.data.user))
                         //跳转到相应界面
-                        console.log(resp.data.data)
                         dispatch(loginSuccess(resp.data.data.user))
 
                     }

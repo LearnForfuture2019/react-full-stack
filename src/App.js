@@ -1,21 +1,25 @@
-import React,{Component} from 'react'
-import {Switch,Route} from 'react-router-dom'
+import React, {Component} from 'react'
+import {Switch, Route} from 'react-router-dom'
 import {mainRoutes} from './routes'
-export default class App extends Component{
-    render(){
+import Frame from "./components/frame";
+
+export default class App extends Component {
+    render() {
         return (
-            <Switch>
-                {
-                    mainRoutes.map(route =>{
-                        return (
-                            <Route path={route.pathname}
-                                   key={route.pathname}
-                                   component={route.component}
-                            />
-                        )
-                    })
-                }
-            </Switch>
+            <Frame>
+                <Switch>
+                    {
+                        mainRoutes.map(route => {
+                            return (
+                                <Route path={route.pathname}
+                                       key={route.pathname}
+                                       component={route.component}
+                                />
+                            )
+                        })
+                    }
+                </Switch>
+            </Frame>
 
         )
     }

@@ -5,7 +5,9 @@ import {
     LaoBanInfo,
     DaShenInfo,
     DaShen,
-    LaoBan
+    LaoBan,
+    Personal,
+    Message
 } from '../views/index'
 
 //构建一级路由
@@ -21,7 +23,15 @@ export const adminRoutes = [
     {
         pathname:'/404',
         component:NotFound
-    }
+    },
+    {
+        pathname:'/laobaninfo',
+        component:LaoBanInfo
+    },
+    {
+        pathname:'/dasheninfo',
+        component:DaShenInfo
+    },
 ]
 
 //构建二级路由
@@ -41,5 +51,14 @@ export const mainRoutes = [
     {
         pathname:'/main/laoban',
         component:LaoBan
+    },
+    {
+        pathname:'/main/personal',
+        component:Personal
+    },
+    {
+        pathname:'/main/message',
+        component:Message
     }
+
 ]

@@ -10,6 +10,7 @@ import {
 } from 'antd-mobile'
 import {connect} from 'react-redux'
 import {updateUser} from '../../../action/user'
+import {Redirect} from 'react-router-dom'
 const mapState = state =>({
     user:state.user
 })
@@ -32,7 +33,6 @@ class LaoBanInfo extends Component {
         }
         return data
     }
-
     handleClick = (el, index) => {
         this.setState({
             header: el.text
@@ -46,12 +46,15 @@ class LaoBanInfo extends Component {
     toSave =()=>{
         const {info,header,post,salary,company} = this.state
         const {_id} = JSON.parse(window.sessionStorage.getItem('user'))
-        console.log({info,header,post,salary,company,_id})
-        // this.props.updateUser({info,header,post,_id})
+        this.props.updateUser({info,header,post,_id,salary,company})
     }
     render() {
         const data = this.getHeaderList()
-        const {header,post,info} = this.state
+        const {header} = this.state
+        const {path} = this.props.user
+        if (path && path !== '/laobaninfo'){
+            return <Redirect to={path}/>
+        }
         return (
             <div>
                 <NavBar>老板信息完善</NavBar>
