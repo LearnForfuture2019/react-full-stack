@@ -6,6 +6,7 @@ import {Provider} from 'react-redux'
 import store from "./store";
 import {adminRoutes} from './routes'
 
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>

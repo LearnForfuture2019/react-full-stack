@@ -7,7 +7,8 @@ import {
     DaShen,
     LaoBan,
     Personal,
-    Message
+    Message,
+    Chat
 } from '../views/index'
 
 //构建一级路由
@@ -31,6 +32,10 @@ export const adminRoutes = [
     {
         pathname:'/dasheninfo',
         component:DaShenInfo
+    },
+    {
+        pathname:'/chat/:userid',
+        component:Chat
     },
 ]
 

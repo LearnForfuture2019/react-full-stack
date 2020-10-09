@@ -24,6 +24,11 @@ export const receiveUser = (data) =>({
     type:actionTypes.RECEIVE_USER,
     payload:data
 })
+
+//同步推出登录action
+export const logOut = ()=>({
+    type:actionTypes.LOG_OUT
+})
 //异步登录action
 export const userLogin = (userInfo)=>{
     const {username,password} = userInfo

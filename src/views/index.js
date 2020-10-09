@@ -43,6 +43,10 @@ const Message = Loadable({
     loader: () => import('./main/message'),
     loading: Loading,
 });
+const Chat = Loadable({
+    loader: () => import('./main/chat'),
+    loading: Loading,
+});
 export {
     Login,
     Register,
@@ -52,5 +56,6 @@ export {
     DaShen,
     LaoBan,
     Personal,
-    Message
+    Message,
+    Chat
 }

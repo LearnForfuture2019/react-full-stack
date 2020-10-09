@@ -8,6 +8,7 @@ import {
 import {connect} from 'react-redux'
 import './personal.css'
 import user from "../../../reducers/user";
+import {logOut} from '../../../action/user'
 
 const {Item} = List
 const {Brief} = Item
@@ -15,14 +16,13 @@ const mapState = state => ({
     user: state.user
 })
 
-@connect(mapState)
+@connect(mapState,{logOut})
 class Personal extends Component {
     logout =()=>{
-        //跳转到根目录
+        this.props.logOut()
         this.props.history.replace('/')
     }
     render() {
-        console.log(this.props.user)
         const {header, username, post, info, salary,company} = JSON.parse(window.sessionStorage.getItem('user'))
         return (
             <div>

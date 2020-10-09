@@ -21,7 +21,6 @@ class LaoBan extends Component {
     getList = () => {
         getListByType({type: 'laoban'})
             .then(resp => {
-                console.log(resp.data.data)
                 if (resp.status === 200) {
                     if (resp.data.code === 1) {
                         this.setState({
@@ -36,10 +35,11 @@ class LaoBan extends Component {
     componentDidMount() {
         this.getList()
     }
-
+    handleClick =() =>{
+        console.log(this.props)
+    }
     render() {
         const {userList} = this.state
-        console.log(userList)
         return (
             <div>
                 <NavBar>老板列表</NavBar>
@@ -48,7 +48,7 @@ class LaoBan extends Component {
                         return (
                             <WingBlank size="lg" key={user._id}>
                                 <WhiteSpace size="lg"/>
-                                <Card>
+                                <Card onClick={this.handleClick}>
                                     <Card.Header
                                         //这个bug是因为有的头像在开始的时候没有传入
                                         thumb={user.header ? require(`../../../components/imgs/headers/${user.header}.png`) : null}

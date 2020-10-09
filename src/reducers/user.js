@@ -25,6 +25,8 @@ export default (state = initUser, action) => {
             return {...state,...action.payload,errMsg: '',path}
         case actiosTypes.LOGIN_FAILED:
             return {...state,errMsg: action.payload}
+        case actiosTypes.LOG_OUT:
+            return initUser
         default:
             return state
     }
