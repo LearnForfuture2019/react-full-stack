@@ -18,8 +18,6 @@ const mapState = state => ({
 @connect(mapState)
 class Personal extends Component {
     logout =()=>{
-        //清除sessionStorage中保存的信息
-        window.sessionStorage.removeItem('user')
         //跳转到根目录
         this.props.history.replace('/')
     }

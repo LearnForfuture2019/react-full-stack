@@ -6,7 +6,6 @@ export default class Message extends Component{
         return (
             <div>
                 <NavBar>消息列表</NavBar>
-
             </div>
         )
     }

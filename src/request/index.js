@@ -23,3 +23,8 @@ export const login = (data) =>{
 export const updateById = (data) =>{
     return service.post('/update',data)
 }
+
+//获取用户列表
+export const getListByType = (type)=>{
+    return service.post('/list',type)
+}
