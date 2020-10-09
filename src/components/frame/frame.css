@@ -1,0 +1,14 @@
+.outer-frame{
+    position: relative;
+}
+.footer-frame{
+    position: fixed;
+    bottom: 0;
+
+}
+.outer-div{
+    position: relative;
+    height: 617px;
+    overflow: auto;
+    margin-bottom: 5px;
+}

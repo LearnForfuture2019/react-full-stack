@@ -38,6 +38,42 @@ export default class LaoBan extends Component{
                         </Card.Body>
                     </Card>
                     <WhiteSpace size="lg" />
+                    <Card>
+                        <Card.Header
+                            thumb={require('../../../components/imgs/headers/头像2.png')}
+                            extra={<span>dashen2</span>}
+                        />
+                        <Card.Body>
+                            <div>前端工程师</div>
+                            <WhiteSpace size="lg" />
+                            <div>描述：JS/JQuery/React</div>
+                        </Card.Body>
+                    </Card>
+                    <WhiteSpace size="lg" />
+                    <Card>
+                        <Card.Header
+                            thumb={require('../../../components/imgs/headers/头像2.png')}
+                            extra={<span>dashen2</span>}
+                        />
+                        <Card.Body>
+                            <div>前端工程师</div>
+                            <WhiteSpace size="lg" />
+                            <div>描述：JS/JQuery/React</div>
+                        </Card.Body>
+                    </Card>
+                    <WhiteSpace size="lg" />
+                    <Card>
+                        <Card.Header
+                            thumb={require('../../../components/imgs/headers/头像2.png')}
+                            extra={<span>dashen2</span>}
+                        />
+                        <Card.Body>
+                            <div>前端工程师</div>
+                            <WhiteSpace size="lg" />
+                            <div>描述：JS/JQuery/React</div>
+                        </Card.Body>
+                    </Card>
+                    <WhiteSpace size="lg" />
                 </WingBlank>
             </div>
         )

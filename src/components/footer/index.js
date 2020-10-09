@@ -38,7 +38,6 @@ const mapState = state =>({user:state.user})
         this.setState({
             selectedTab: value,
         })
-        console.log(path)
         this.props.history.push(path)
 
     }
