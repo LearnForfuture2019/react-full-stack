@@ -36,7 +36,9 @@ class DaShen extends Component {
     componentDidMount() {
         this.getList()
     }
-
+    toChat =(userid)=>{
+        this.props.history.push(`/chat/${userid}`)
+    }
     render() {
         const {userList} = this.state
         console.log(userList)
@@ -48,7 +50,7 @@ class DaShen extends Component {
                         return (
                             <WingBlank size="lg" key={user._id}>
                                 <WhiteSpace size="lg"/>
-                                <Card>
+                                <Card onClick={()=>this.toChat(user._id)}>
                                     <Card.Header
                                         //这个bug是因为有的头像在开始的时候没有传入
                                         thumb={user.header ? require(`../../../components/imgs/headers/${user.header}.png`) : null}

@@ -1,0 +1,16 @@
+#chat-page .chat-me .am-list-extra{
+    flex-basis: auto; /*宽度包裹内容*/
+}
+.chat-me{
+    position: relative;
+}
+
+#chat-page .chat-me .am-list-content{
+    padding-right: 15px;
+    text-align: right;
+}
+.fixed-to-bottom{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
