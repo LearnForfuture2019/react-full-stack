@@ -30,9 +30,6 @@ const mapState = state =>({user:state.user})
 @connect(mapState)
 @withRouter
  class Footer extends Component{
-    state = {
-        selectedTab: 'dashen',
-    }
     handlePress = (value) =>{
         const path = '/main/'+value
         this.setState({
@@ -44,6 +41,8 @@ const mapState = state =>({user:state.user})
     render(){
         const {type} = JSON.parse(window.sessionStorage.getItem('user'))
         const filterData = data.filter(item => item.key !== type)
+        console.log(this.props.location.pathname.split('/')[2])
+        const isSelected = this.props.location.pathname.split('/')[2]
         return (
             <TabBar
                 unselectedTintColor="#949494"
@@ -59,7 +58,7 @@ const mapState = state =>({user:state.user})
                                 key={item.key}
                                 icon={{uri:require(`../imgs/nav/${item.icon}.png`)}}
                                 selectedIcon={{uri:require(`../imgs/nav/${item.selectedIcon}.png`)}}
-                                selected={this.state.selectedTab === item.key}
+                                selected={isSelected === item.key}
                                 onPress={this.handlePress.bind(this,item.key)}
                             />
                         )
