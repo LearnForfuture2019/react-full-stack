@@ -51,6 +51,10 @@ class DaShenInfo extends Component {
     render() {
         const data = this.getHeaderList()
         const {header} = this.state
+        const {path} = this.props.user
+        if (path && path !== '/dasheninfo'){
+            return <Redirect to={path}/>
+        }
         return (
             <div>
                 <NavBar>大神信息完善</NavBar>

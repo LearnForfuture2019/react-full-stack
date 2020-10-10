@@ -94,6 +94,7 @@ export const updateUser = (data)=>{
                     if (resp.data.code === 0){
                         dispatch(loginFailed(resp.data.msg))
                     }else{
+                        window.sessionStorage.setItem('user',JSON.stringify(resp.data.data))
                         dispatch(loginSuccess(resp.data.data))
                     }
                 }
