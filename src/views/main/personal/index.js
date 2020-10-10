@@ -7,7 +7,7 @@ import {
 
 import {connect} from 'react-redux'
 import './personal.css'
-import user from "../../../reducers/user";
+
 import {logOut} from '../../../action/user'
 
 const {Item} = List

@@ -5,16 +5,34 @@ import {
     Icon,
     InputItem
 } from 'antd-mobile'
-
+import {connect} from 'react-redux'
+import {sendMessage} from '../../../action/chat'
 import './chat.css'
 const {Item} = List
-export default class Chat extends Component {
+@connect(null,{sendMessage})
+class Chat extends Component {
+    state = {
+        content:''
+    }
+    submit = (value)=>{
+        const to = this.props.match.params.userid
+        const from = JSON.parse(window.sessionStorage.getItem('user'))._id
+        const content= this.state.content.trim()
+        if (content){
+            this.props.sendMessage({from,to,content})
+        }
+        //发送完成，清除输入框数据
+        this.setState({
+            content:''
+        })
+
+    }
     render() {
         return (
             <div id='chat-page'>
                 <NavBar
                     icon={<Icon type="left"/>}
-                    onLeftClick={() => console.log('onLeftClick')}
+                    onLeftClick={() => this.props.history.goBack()}
                 >dashen2</NavBar>
                 <List>
                     <Item
@@ -42,9 +60,11 @@ export default class Chat extends Component {
                 </List>
                 <div className='fixed-to-bottom'>
                     <InputItem
+                        value={this.state.content}
+                        onChange={value => this.setState({content:value})}
                         placeholder='请输入'
                         extra={
-                            <span>发送</span>
+                            <span onClick={this.submit}>发送</span>
                         }
                     />
                 </div>
@@ -53,3 +73,4 @@ export default class Chat extends Component {
         )
     }
 }
+export default Chat

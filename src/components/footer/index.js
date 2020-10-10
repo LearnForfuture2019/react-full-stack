@@ -41,7 +41,7 @@ const mapState = state =>({user:state.user})
     render(){
         const {type} = JSON.parse(window.sessionStorage.getItem('user'))
         const filterData = data.filter(item => item.key !== type)
-        console.log(this.props.location.pathname.split('/')[2])
+        //用来保证底部导航选中图标与页面相匹配
         const isSelected = this.props.location.pathname.split('/')[2]
         return (
             <TabBar

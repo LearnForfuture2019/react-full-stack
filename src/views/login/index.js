@@ -10,7 +10,6 @@ import {
 import {userLogin} from '../../action/user'
 import Logo from "../../components/logo";
 import {Redirect} from 'react-router-dom'
-import DaShenInfo from "../main/daShenInfo";
 import './login.css'
 import {connect} from "react-redux";
 const mapState = state =>({user:state.user})

@@ -1,9 +1,13 @@
 import actionTypes from './action-types'
+import io from 'socket.io-client'
 import {
     login,
     register,
     updateById
 } from '../request'
+
+
+
 //同步登录成功
 export const loginSuccess = (userInfo) => ({
     type: actionTypes.LOGIN_SUCCESS,
