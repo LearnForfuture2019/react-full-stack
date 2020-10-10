@@ -7,12 +7,12 @@ import {
 } from "antd-mobile";
 import {getListByType} from '../../../request'
 import {connect} from "react-redux";
-
+import {getMsgListById} from '../../../action/chat'
 const mapState = state => ({
     user: state.user
 })
 
-@connect(mapState)
+@connect(mapState,{getMsgListById})
 class DaShen extends Component {
     state = {
         userList: []
@@ -35,6 +35,9 @@ class DaShen extends Component {
 
     componentDidMount() {
         this.getList()
+        //异步获取消息列表
+        const userid = JSON.parse(window.sessionStorage.getItem('user'))._id
+        this.props.getMsgListById(userid)
     }
     toChat =(userid)=>{
         this.props.history.push(`/chat/${userid}`)

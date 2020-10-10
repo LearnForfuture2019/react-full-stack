@@ -6,13 +6,14 @@ import {
     WhiteSpace
 } from "antd-mobile";
 import {getListByType} from '../../../request'
+import {getMsgListById} from '../../../action/chat'
 import {connect} from "react-redux";
 
 const mapState = state => ({
     user: state.user
 })
 
-@connect(mapState)
+@connect(mapState,{getMsgListById})
 class LaoBan extends Component {
     state = {
         userList: []
@@ -34,6 +35,9 @@ class LaoBan extends Component {
 
     componentDidMount() {
         this.getList()
+        //异步获取消息列表
+        const userid = JSON.parse(window.sessionStorage.getItem('user'))._id
+        this.props.getMsgListById(userid)
     }
     toChat = (userid)=>{
         this.props.history.push(`/chat/${userid}`)

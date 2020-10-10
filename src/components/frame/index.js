@@ -2,8 +2,9 @@ import React,{Component} from 'react'
 import Footer from "../footer";
 import {} from 'react-router-dom'
 import './frame.css'
-export default class Frame extends Component{
+ class Frame extends Component{
     render(){
+
         return (
             <div className='outer-frame'>
                 <div className='outer-div'>
@@ -14,3 +15,4 @@ export default class Frame extends Component{
         )
     }
 }
+export default Frame

@@ -28,3 +28,8 @@ export const updateById = (data) =>{
 export const getListByType = (type)=>{
     return service.post('/list',type)
 }
+
+//获取聊天消息列表
+export const getMsgList = (userid)=>{
+    return service.post('/msglist',{userid})
+}
