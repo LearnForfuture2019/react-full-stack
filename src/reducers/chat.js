@@ -10,17 +10,26 @@ export default (state=initChat,action) =>{
     switch (action.type) {
         case actionTypes.RECEIVE_MSG_LIST:
             const {users,chatMsgs} = action.payload
+            //需要一个from，需要to
             let count = 0
             chatMsgs.forEach(msgs =>{
-                if (!chatMsgs.read){
+                if (!msgs.read){
                     count++
                 }
             })
+            console.log(count)
             return {
                 ...state,
                 users,
                 chatMsgs,
                 unReadCount:count
+            }
+        case actionTypes.MSG_READ:
+            const newCount = state.unReadCount - action.payload
+            return {
+                users: state.users,
+                chatMsgs: state.chatMsgs,
+                unReadCount: newCount
             }
         case actionTypes.RECEIVE_MSG:
             //更新chatMsgs

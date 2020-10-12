@@ -5,6 +5,7 @@ import {
     Badge
 } from 'antd-mobile'
 import {connect} from 'react-redux'
+import {asyMsgRead} from '../../../action/chat'
 
 const {Item} = List
 const {Brief} = Item
@@ -19,7 +20,7 @@ const mapState = state => ({
 *   2.得到所有的lastMsg的数组
 *   3.对数组进行排序（按create_time降序）
 * */
-@connect(mapState)
+@connect(mapState,{asyMsgRead})
 class Message extends Component {
     getLastMsgs = (chatMsgs, userid) => {
         //1.找出每个聊天的lastMsg，并用一个对象容器来保存{chat_id:lastMsg}
@@ -63,7 +64,8 @@ class Message extends Component {
         * */
         return lastMsgObjValues.sort((m1, m2) => m2.create_time - m1.create_time)
     }
-    toChat = (targetId) => {
+    toChat = (targetId,userid) => {
+        this.props.asyMsgRead(targetId,userid)
         this.props.history.push(`/chat/${targetId}`)
     }
 
@@ -84,7 +86,7 @@ class Message extends Component {
                                         key={msg.create_time}
                                         arrow="horizontal"
                                         thumb={users[msg.to === userid?msg.from:msg.to].header ? require(`../../../components/imgs/headers/${users[msg.to === userid?msg.from:msg.to].header}.png`) : null}
-                                        onClick={() => this.toChat(msg.to === userid?msg.from:msg.to)}
+                                        onClick={() => this.toChat(msg.to === userid?msg.from:msg.to,userid)}
                                     >
                                         {msg.content}
                                         <Brief>

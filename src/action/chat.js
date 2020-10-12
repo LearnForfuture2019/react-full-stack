@@ -1,6 +1,6 @@
 import actionTypes from './action-types'
 import io from 'socket.io-client'
-import {getMsgList} from '../request/index'
+import {getMsgList,reqReadMsg} from '../request/index'
 import user from "../reducers/user";
 /*
 * 初始化客户端socketio
@@ -40,6 +40,11 @@ export const receiveMessage = (chatMsg)=>({
     payload:chatMsg
 })
 
+//同步修改消息为已读
+export const msgRead = (count) =>({
+    type:actionTypes.MSG_READ,
+    payload:count
+})
 
 //同步接收消息列表
 export const getChatMsgList = (chatMsgs)=>({
@@ -69,5 +74,19 @@ export const sendMessage = ({from,to,content})=>{
     return dispatch =>{
         // initIO():这里不在需要初始化是因为我在接收消息的时候进行了初始化，io对象以及存在了
         io.socket.emit('sendMessage',{from,to,content})
+    }
+}
+
+//异步修改消息为已读
+export const asyMsgRead = (from,to) =>{
+    console.log({from,to})
+    return dispatch =>{
+        reqReadMsg({from,to})
+            .then(resp =>{
+               if (resp.data.code === 1){
+                   //修改成功，分发同步action
+                   dispatch(msgRead(resp.data.data))
+               }
+            })
     }
 }

@@ -84,6 +84,7 @@ class Chat extends Component {
         const {users, chatMsgs} = JSON.parse(window.sessionStorage.getItem('chat'))
         const chat_id = [to, from].sort().join('_')
         const msgList = chatMsgs.filter(chat => chat.chat_id === chat_id)
+        console.log(msgList)
         /*过滤出当前聊天对象的消息*/
         return (
             <div id='chat-page'>
