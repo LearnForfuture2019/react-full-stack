@@ -33,10 +33,16 @@ class Chat extends Component {
             '😄','😆','😁','😂','🙂','😍','😘','😝']
         this.emojis = emojis.map(emoji => ({text:emoji}))
     }
+    componentDidUpdate() {
+        //发送消息后，列表自动滑动到底部
+        window.scrollTo(0,document.body.scrollHeight)
+    }
 
     componentDidMount() {
         const userid = JSON.parse(window.sessionStorage.getItem('user'))._id
         this.props.getMsgListById(userid)
+        //初始化显示列表底部显示
+        window.scrollTo(0,document.body.scrollHeight)
     }
 
     submit = (value) => {
@@ -86,7 +92,7 @@ class Chat extends Component {
                     onLeftClick={() => this.props.history.goBack()}
                     className='stick-top'
                 >{users[to].username}</NavBar>
-                <List className='change-list'>
+                <List style={{marginTop:50,marginBottom:50}}>
                     {
                         msgList.map(msg => {
                             if (msg.from === to) { //表示我收到的消息
