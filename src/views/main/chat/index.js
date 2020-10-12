@@ -3,7 +3,8 @@ import {
     NavBar,
     List,
     Icon,
-    InputItem
+    InputItem,
+    Grid
 } from 'antd-mobile'
 import {connect} from 'react-redux'
 import {sendMessage, getMsgListById} from '../../../action/chat'
@@ -17,7 +18,20 @@ const mapState = state => ({
 @connect(mapState, {sendMessage, getMsgListById})
 class Chat extends Component {
     state = {
-        content: ''
+        content: '',
+        isShow:false
+    }
+
+    componentWillMount() {
+        const emojis = ['😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝',
+            '😄','😆','😁','😂','🙂','😍','😘','😝']
+        this.emojis = emojis.map(emoji => ({text:emoji}))
     }
 
     componentDidMount() {
@@ -32,12 +46,32 @@ class Chat extends Component {
         if (content) {
             this.props.sendMessage({from, to, content})
         }
-        //发送完成，清除输入框数据
+        /*发送完成:
+            1.清除输入框数据
+            2.切换表情框的显示状态
+        */
         this.setState({
-            content: ''
+            content: '',
+            isShow:false
         })
     }
-
+    handleEmoji =(el)=>{
+        const emoji = el.text
+        const {content} = this.state
+        this.setState({
+            content: content+emoji
+        })
+    }
+    handleShow = ()=>{
+        const isShow = !this.state.isShow
+        this.setState({isShow})
+        //异步手动派发一个resize事件，解决表情列表显示bug问题
+        if (isShow){
+            setTimeout(()=>{
+                window.dispatchEvent(new Event('resize'))
+            },0)
+        }
+    }
     render() {
         const to = this.props.match.params.userid
         const from = JSON.parse(window.sessionStorage.getItem('user'))._id
@@ -81,11 +115,25 @@ class Chat extends Component {
                     <InputItem
                         value={this.state.content}
                         onChange={value => this.setState({content: value})}
+                        onFocus={()=>this.setState({isShow:false})}
                         placeholder='请输入'
                         extra={
-                            <span onClick={this.submit}>发送</span>
+                            <div>
+                                <span onClick={this.handleShow}>🙂</span>
+                                <span onClick={this.submit}>发送</span>
+                            </div>
                         }
                     />
+                    {
+                        this.state.isShow?(
+                            <Grid data={this.emojis}
+                                  columnNum={8}
+                                  isCarousel={true}
+                                  carouselMaxRow={4}
+                                  onClick={(el)=>this.handleEmoji(el)}
+                            />
+                        ):null
+                    }
                 </div>
             </div>
 
