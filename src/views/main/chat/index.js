@@ -84,8 +84,9 @@ class Chat extends Component {
                 <NavBar
                     icon={<Icon type="left"/>}
                     onLeftClick={() => this.props.history.goBack()}
+                    className='stick-top'
                 >{users[to].username}</NavBar>
-                <List>
+                <List className='change-list'>
                     {
                         msgList.map(msg => {
                             if (msg.from === to) { //表示我收到的消息
@@ -119,8 +120,8 @@ class Chat extends Component {
                         placeholder='请输入'
                         extra={
                             <div>
-                                <span onClick={this.handleShow}>🙂</span>
-                                <span onClick={this.submit}>发送</span>
+                                <span onClick={this.handleShow} style={{marginRight:5}}>🙂</span>
+                                <span onClick={this.submit} style={{color:'black'}}>发送</span>
                             </div>
                         }
                     />

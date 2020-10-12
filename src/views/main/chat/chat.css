@@ -14,3 +14,15 @@
     position: fixed;
     bottom: 0;
 }
+#chat-page {
+    position: relative;
+}
+.stick-top{
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
+.am-list-body{
+    margin-top: 45px;
+}
