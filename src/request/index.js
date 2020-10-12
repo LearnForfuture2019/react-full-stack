@@ -33,3 +33,8 @@ export const getListByType = (type)=>{
 export const getMsgList = (userid)=>{
     return service.post('/msglist',{userid})
 }
+
+//修改消息为已读
+export const reqReadMsg = ({from,to}) =>{
+    return service.post('/readmsg',{from,to})
+}
