@@ -1,5 +1,4 @@
 import actionTypes from './action-types'
-import io from 'socket.io-client'
 import {
     login,
     register,
@@ -35,7 +34,7 @@ export const logOut = ()=>({
 })
 //异步登录action
 export const userLogin = (userInfo)=>{
-    const {username,password} = userInfo
+    const {username,password,_id} = userInfo
     if (!username || !password){
         return errorMessage('账户名/密码必须输入')
     }

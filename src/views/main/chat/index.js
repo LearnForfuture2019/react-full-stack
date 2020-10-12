@@ -36,7 +36,6 @@ class Chat extends Component {
         this.setState({
             content: ''
         })
-
     }
 
     render() {

@@ -22,6 +22,13 @@ export default (state=initChat,action) =>{
                 chatMsgs,
                 unReadCount:count
             }
+        case actionTypes.RECEIVE_MSG:
+            //更新chatMsgs
+            //state表示的是上一个状态的state，而不是初始状态的
+            return {
+                users:state.users,
+                chatMsgs: [...state.chatMsgs,action.payload]
+            }
         default:
             return state
     }

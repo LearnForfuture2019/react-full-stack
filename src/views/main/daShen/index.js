@@ -44,7 +44,7 @@ class DaShen extends Component {
     }
     render() {
         const {userList} = this.state
-        console.log(userList)
+        console.log(this.props.dispatch)
         return (
             <div>
                 <NavBar>大神列表</NavBar>
