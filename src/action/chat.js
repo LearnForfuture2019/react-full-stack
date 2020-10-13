@@ -47,9 +47,9 @@ export const msgRead = (count) =>({
 })
 
 //同步接收消息列表
-export const getChatMsgList = (chatMsgs)=>({
+export const getChatMsgList = (chatMsgs,userid)=>({
     type:actionTypes.RECEIVE_MSG_LIST,
-    payload:chatMsgs
+    payload:{chatMsgs,userid}
 })
 //异步接收聊天消息列表
 export const getMsgListById = (userid) =>{
@@ -63,7 +63,7 @@ export const getMsgListById = (userid) =>{
                         //将该数据保存至sessionStorage
                         window.sessionStorage.setItem('chat',JSON.stringify(resp.data.data))
                         //分发同步action
-                        dispatch(getChatMsgList(resp.data.data))
+                        dispatch(getChatMsgList(resp.data.data,userid))
                     }
                 }
             })

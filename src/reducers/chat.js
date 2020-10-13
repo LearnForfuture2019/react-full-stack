@@ -9,11 +9,18 @@ const initChat = {
 export default (state=initChat,action) =>{
     switch (action.type) {
         case actionTypes.RECEIVE_MSG_LIST:
-            const {users,chatMsgs} = action.payload
+            console.log(action.payload)
+            const {users,chatMsgs} = action.payload.chatMsgs
+            const {userid} = action.payload
             //需要一个from，需要to
             let count = 0
             chatMsgs.forEach(msgs =>{
-                if (!msgs.read){
+                /*
+                * 未读消息的统计规则：
+                *   1.首先read属性为false
+                *   2.该消息要是别人发给我的
+                * */
+                if (!msgs.read && msgs.to === userid){
                     count++
                 }
             })
